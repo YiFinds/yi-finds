@@ -629,6 +629,54 @@
             color: #94A3B8;
         }
 
+
+        /* --- SUCCESS MESSAGE --- */
+        .success-toast {
+            position: fixed;
+            top: 95px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: var(--white);
+            color: var(--dark);
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            z-index: 2000;
+            max-width: 90%;
+            width: 460px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s ease;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .success-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .success-toast i {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-top: 0.1rem;
+        }
+
+        .success-toast strong {
+            display: block;
+            margin-bottom: 0.2rem;
+            color: var(--dark);
+        }
+
+        .success-toast p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .story-container {
@@ -716,6 +764,15 @@
 </head>
 
 <body>
+
+    <div id="successToast" class="success-toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <strong>Thank you!</strong>
+            <p>Your message was sent successfully. We will get back to you soon.</p>
+        </div>
+    </div>
+
 
     <nav id="navbar">
         <a href="#" class="logo">Yi<span>Finds</span></a>
@@ -1079,6 +1136,24 @@
             });
         });
     
+
+        // Show success message after form redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const successToast = document.getElementById('successToast');
+
+        if (urlParams.get('sent') === '1' && successToast) {
+            setTimeout(() => {
+                successToast.classList.add('show');
+            }, 400);
+
+            setTimeout(() => {
+                successToast.classList.remove('show');
+            }, 6000);
+
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
+
         // Contact form submit with AJAX
         const contactForm = document.getElementById('contactForm');
         const formStatus = document.getElementById('formStatus');
@@ -1119,7 +1194,7 @@
                         formStatus.textContent = 'Thank you! Redirecting...';
                     }
 
-                    window.location.href = 'https://yifinds.github.io/yi-finds/';
+                    window.location.href = 'https://yifinds.github.io/yi-finds/?sent=1';
                 } catch (error) {
                     // Fallback: if AJAX fails, use normal FormSubmit behavior with _next.
                     contactForm.submit();
