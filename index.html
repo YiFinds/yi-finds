@@ -292,6 +292,12 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
+        .product-img {
+            height: 240px;
+            width: 100%;
+            object-fit: cover;
+        }
+
         .product-visual {
             height: 210px;
             width: 100%;
@@ -488,6 +494,60 @@
             margin-bottom: 1rem;
         }
 
+
+        /* --- GALLERY --- */
+        .gallery {
+            padding: 5rem 5%;
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            min-height: 280px;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.2rem;
+            color: var(--white);
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.9));
+        }
+
+        .gallery-label h3 {
+            color: var(--white);
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .gallery-label p {
+            color: #E2E8F0;
+            font-size: 0.9rem;
+        }
+
         /* --- FAQ --- */
         .faq {
             padding: 5rem 5%;
@@ -662,6 +722,7 @@
 
         <div class="nav-links" id="navLinks">
             <a href="#products">Products</a>
+            <a href="#gallery">Gallery</a>
             <a href="#why">Why Yi Finds</a>
             <a href="#story">Our Story</a>
             <a href="#faq">FAQ</a>
@@ -732,9 +793,7 @@
         <div class="products-grid">
 
             <div class="product-card">
-                <div class="product-visual">
-                    <i class="fas fa-mug-hot"></i>
-                </div>
+                <img src="https://images.unsplash.com/photo-1531969179221-3946e6b5a5e7?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Taiwanese tea and local flavors" class="product-img">
                 <div class="product-content">
                     <div>
                         <div class="product-meta">
@@ -751,9 +810,7 @@
             </div>
 
             <div class="product-card">
-                <div class="product-visual">
-                    <i class="fas fa-gem"></i>
-                </div>
+                <img src="https://images.unsplash.com/photo-1759459981078-35c1befc695b?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Lifestyle and design goods display" class="product-img">
                 <div class="product-content">
                     <div>
                         <div class="product-meta">
@@ -769,6 +826,63 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Product Gallery</h2>
+        <p class="section-subtitle">
+            A visual look at the kinds of Taiwanese products and experiences Yi Finds wants to introduce to global consumers.
+        </p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1745883949374-baeba0ed57c3?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Bubble tea">
+                <div class="gallery-label">
+                    <h3>Bubble Tea</h3>
+                    <p>A globally loved Taiwanese drink.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1553653841-e591186b20d6?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Pineapple cake">
+                <div class="gallery-label">
+                    <h3>Pineapple Cake</h3>
+                    <p>A classic Taiwanese gift and sweet snack.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1665898362159-616b0ade1044?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Taiwanese market snacks">
+                <div class="gallery-label">
+                    <h3>Local Snacks</h3>
+                    <p>Popular flavors from Taiwan's food culture.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Taiwanese tea">
+                <div class="gallery-label">
+                    <h3>Tea Culture</h3>
+                    <p>Tea, ceremony, and daily enjoyment.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1597215753169-e717ab0acbe5?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Taiwanese meals and drinks">
+                <div class="gallery-label">
+                    <h3>Everyday Favorites</h3>
+                    <p>Food and drinks with local character.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1604214932185-b2828c00888c?auto=format&fit=crop&fm=jpg&q=80&w=1200" alt="Taipei food shops">
+                <div class="gallery-label">
+                    <h3>Street Food Energy</h3>
+                    <p>The spirit of Taiwan's lively food scene.</p>
+                </div>
+            </div>
         </div>
     </section>
 
