@@ -919,7 +919,7 @@
         </p>
 
         <div class="contact-container">
-            <form action="https://formsubmit.co/yifinds@gmail.com" method="POST" class="contact-form">
+            <form action="https://formsubmit.co/yifinds@gmail.com" method="POST" class="contact-form" id="contactForm">
 
                 <input type="hidden" name="_subject" value="New Yi Finds Inquiry" />
                 <input type="hidden" name="_captcha" value="false" />
@@ -958,6 +958,9 @@
 
                 <div class="form-group full">
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </div>
+                <div class="form-group full">
+                    <p id="formStatus" style="display:none; text-align:center; color: var(--primary); font-weight: 600;"></p>
                 </div>
             </form>
         </div>
@@ -1075,6 +1078,58 @@
                 navLinks.classList.remove('active');
             });
         });
+    
+        // Contact form submit with AJAX
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                if (formStatus) {
+                    formStatus.style.display = 'block';
+                    formStatus.textContent = 'Sending your message...';
+                }
+
+                try {
+                    const formData = new FormData(contactForm);
+
+                    const response = await fetch('https://formsubmit.co/ajax/yifinds@gmail.com', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Form submission failed');
+                    }
+
+                    contactForm.reset();
+
+                    if (formStatus) {
+                        formStatus.textContent = 'Thank you! Redirecting...';
+                    }
+
+                    window.location.href = 'https://yifinds.github.io/yi-finds/';
+                } catch (error) {
+                    // Fallback: if AJAX fails, use normal FormSubmit behavior with _next.
+                    contactForm.submit();
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
+        }
+
     </script>
 
 </body>
